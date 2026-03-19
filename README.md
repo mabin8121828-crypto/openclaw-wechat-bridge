@@ -130,6 +130,10 @@ For offline plugin testing without a real bridge, see `docs/MOCK_BRIDGE.md`.
 
 See `ROADMAP.md` for the staged implementation plan.
 
+For contribution expectations, see `CONTRIBUTING.md`.
+
+For the first public issue slices, see `docs/ISSUE_BACKLOG.md`.
+
 ## Suggested project positioning
 
 Publish and describe this as a clean-room bridge project:
