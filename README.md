@@ -42,6 +42,8 @@ This repository therefore gives you three safe starting pieces:
 ## Repository layout
 
 ```text
+docs/
+  LOCAL_VALIDATION.md
 packages/
   openclaw-wechat-access/
     openclaw.plugin.json
@@ -54,6 +56,7 @@ skill/
     SKILL.md
     agents/openai.yaml
     references/architecture.md
+ROADMAP.md
 ```
 
 ## Included in this repository
@@ -88,6 +91,12 @@ The example expects you to provide:
 3. Validate outbound messaging with known-safe test content.
 4. Validate inbound routing and replies.
 5. Only after that, experiment with a separate pairing helper.
+
+For a sanitized public checklist, see [docs/LOCAL_VALIDATION.md](F:/Codex/projects/openclaw-wechat-bridge/docs/LOCAL_VALIDATION.md).
+
+## Project plan
+
+See [ROADMAP.md](F:/Codex/projects/openclaw-wechat-bridge/ROADMAP.md) for the staged implementation plan.
 
 ## Suggested project positioning
 
