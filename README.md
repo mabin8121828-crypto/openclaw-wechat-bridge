@@ -134,6 +134,8 @@ For contribution expectations, see `CONTRIBUTING.md`.
 
 For the first public issue slices, see `docs/ISSUE_BACKLOG.md`.
 
+For disclosure expectations and repository security scope, see `SECURITY.md`.
+
 ## Suggested project positioning
 
 Publish and describe this as a clean-room bridge project:
