@@ -66,6 +66,7 @@ skill/
     agents/openai.yaml
     references/architecture.md
 ROADMAP.md
+tools/
 ```
 
 ## Included in this repository
@@ -92,6 +93,24 @@ The example expects you to provide:
 
 - `WECHAT_BRIDGE_TOKEN`
 - `WECHAT_BRIDGE_WS_URL`
+
+## Quick local setup
+
+From the repository root:
+
+```bash
+npm install
+npm run check
+npm run smoke:test
+```
+
+That gives you:
+
+- workspace dependency install
+- a basic repo-level sanity check
+- a mock-bridge smoke test that exercises WebSocket connection, outbound ack, and injected inbound frames
+
+The repository-level smoke test is currently passing in the local development environment.
 
 ## Recommended local validation flow
 

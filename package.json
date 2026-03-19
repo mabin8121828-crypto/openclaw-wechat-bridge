@@ -1,0 +1,15 @@
+{
+  "name": "openclaw-wechat-bridge-repo",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Workspace and local validation entrypoint for openclaw-wechat-bridge.",
+  "workspaces": [
+    "packages/openclaw-wechat-access"
+  ],
+  "scripts": {
+    "check": "npm run check --workspace openclaw-wechat-access",
+    "mock:server": "npm run mock:server --workspace openclaw-wechat-access",
+    "mock:inject": "npm run mock:inject --workspace openclaw-wechat-access --",
+    "smoke:test": "node ./tools/smoke-test.mjs"
+  }
+}
