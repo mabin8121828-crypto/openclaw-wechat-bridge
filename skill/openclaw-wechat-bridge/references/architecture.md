@@ -12,6 +12,8 @@ The plugin layer appears to need only:
 - `token`
 - `wsUrl`
 
+In private local testing, a plain OpenClaw runtime was able to load a compatible bridge plugin and exchange messages when those two values were already valid.
+
 ## What this means for a clean-room GitHub project
 
 Treat the project as two deliverables:
@@ -27,6 +29,21 @@ Do not hard-code desktop-shell assumptions into the plugin.
 2. accept `token/wsUrl` from env vars or config
 3. validate basic gateway lifecycle
 4. only then add a pairing helper
+
+## Public vs private boundary
+
+Keep these concerns separate:
+
+- Public repository:
+  - plugin scaffold
+  - config contract
+  - pairing interface
+  - docs and tests
+- Private local environment:
+  - real credentials
+  - websocket endpoints
+  - experimental pairing flows
+  - user-specific state directories
 
 ## Safe assumptions
 
