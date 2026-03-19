@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Local validation and mock bridge docs
+    url: https://github.com/mabin8121828-crypto/openclaw-wechat-bridge/tree/main/docs
+    about: Check the local validation and mock bridge guides before filing an issue.
