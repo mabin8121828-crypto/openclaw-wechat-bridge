@@ -1,5 +1,7 @@
 # OpenClaw WeChat Bridge
 
+[![CI](https://github.com/mabin8121828-crypto/openclaw-wechat-bridge/actions/workflows/ci.yml/badge.svg)](https://github.com/mabin8121828-crypto/openclaw-wechat-bridge/actions/workflows/ci.yml)
+
 Clean-room scaffold for bringing a QClaw-style WeChat access path into plain OpenClaw without shipping proprietary QClaw code or private desktop state.
 
 This repository is intentionally split into two parts:
@@ -87,7 +89,7 @@ tools/
 
 ## Example config
 
-See [examples/openclaw.json](F:/Codex/projects/openclaw-wechat-bridge/examples/openclaw.json).
+See `examples/openclaw.json`.
 
 The example expects you to provide:
 
@@ -120,13 +122,13 @@ The repository-level smoke test is currently passing in the local development en
 4. Validate inbound routing and replies.
 5. Only after that, experiment with a separate pairing helper.
 
-For a sanitized public checklist, see [docs/LOCAL_VALIDATION.md](F:/Codex/projects/openclaw-wechat-bridge/docs/LOCAL_VALIDATION.md).
+For a sanitized public checklist, see `docs/LOCAL_VALIDATION.md`.
 
-For offline plugin testing without a real bridge, see [docs/MOCK_BRIDGE.md](F:/Codex/projects/openclaw-wechat-bridge/docs/MOCK_BRIDGE.md).
+For offline plugin testing without a real bridge, see `docs/MOCK_BRIDGE.md`.
 
 ## Project plan
 
-See [ROADMAP.md](F:/Codex/projects/openclaw-wechat-bridge/ROADMAP.md) for the staged implementation plan.
+See `ROADMAP.md` for the staged implementation plan.
 
 ## Suggested project positioning
 
