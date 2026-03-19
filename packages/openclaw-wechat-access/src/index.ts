@@ -1,6 +1,7 @@
 import type { OpenClawPluginApi } from "openclaw/plugin-sdk";
 import { emptyPluginConfigSchema } from "openclaw/plugin-sdk";
 import { BridgeWebSocketClient } from "./client.js";
+import { handleInboundEvent } from "./inbound.js";
 import { setBridgeRuntime } from "./runtime.js";
 import type {
   BridgeClient,
@@ -30,7 +31,7 @@ function resolveAccountConfig(cfg: any, accountId: string): WechatBridgeAccountC
   };
 }
 
-function createBridgeClient(config: WechatBridgeAccountConfig): BridgeClient {
+function createBridgeClient(cfg: any, config: WechatBridgeAccountConfig): BridgeClient {
   if (!config.token || !config.wsUrl) {
     throw new Error("wechat-bridge requires both token and wsUrl");
   }
@@ -60,16 +61,31 @@ function createBridgeClient(config: WechatBridgeAccountConfig): BridgeClient {
       });
     },
     onEvent(event: BridgeInboundEnvelope) {
-      // Public scaffold phase: receive and normalize bridge frames first.
-      // Actual OpenClaw session dispatch should be added in a follow-up step
-      // once the public plugin runtime contract is finalized.
       console.log("[wechat-bridge] inbound event", {
         accountId: config.accountId ?? "default",
         type: event.type,
         hasPayload: typeof event.payload !== "undefined",
       });
+      const client = clients.get(config.accountId ?? "default");
+      if (!client) {
+        console.warn("[wechat-bridge] inbound event received before client registration", {
+          accountId: config.accountId ?? "default",
+        });
+        return;
+      }
+      void handleInboundEvent({
+        cfg,
+        account: config,
+        event,
+        client,
+      }).catch((error) => {
+        console.error("[wechat-bridge] inbound handling failed", {
+          accountId: config.accountId ?? "default",
+          message: error instanceof Error ? error.message : String(error),
+        });
+      });
     },
-  };
+  });
 }
 
 const meta = {
@@ -142,7 +158,7 @@ const channelPlugin = {
     startAccount: async (ctx: any) => {
       const accountId = ctx.accountId ?? "default";
       const config = resolveAccountConfig(ctx.cfg, accountId);
-      const client = createBridgeClient(config);
+      const client = createBridgeClient(ctx.cfg, config);
       clients.set(accountId, client);
       client.start();
       ctx.setStatus({ running: true });

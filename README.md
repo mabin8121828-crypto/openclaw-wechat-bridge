@@ -21,7 +21,7 @@ What the public repository now includes beyond the initial scaffold:
 
 - a reconnecting WebSocket bridge client skeleton
 - outbound `sendText` wiring for normalized message frames
-- inbound frame parsing and logging hooks
+- inbound frame parsing, session recording, and subagent-run hooks
 - explicit separation between runtime transport and QR pairing
 
 What is intentionally not included here:
