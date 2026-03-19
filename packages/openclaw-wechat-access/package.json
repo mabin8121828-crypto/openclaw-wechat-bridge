@@ -6,7 +6,9 @@
   "description": "Clean-room WeChat bridge channel scaffold for OpenClaw.",
   "main": "./src/index.ts",
   "scripts": {
-    "check": "node --eval \"console.log('openclaw-wechat-access scaffold')\""
+    "check": "node --eval \"console.log('openclaw-wechat-access scaffold')\"",
+    "mock:server": "node ./tools/mock-bridge-server.mjs",
+    "mock:inject": "node ./tools/inject-mock-event.mjs"
   },
   "files": [
     "src",

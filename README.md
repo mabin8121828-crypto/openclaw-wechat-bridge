@@ -51,11 +51,13 @@ This repository therefore gives you three safe starting pieces:
 ```text
 docs/
   LOCAL_VALIDATION.md
+  MOCK_BRIDGE.md
 packages/
   openclaw-wechat-access/
     openclaw.plugin.json
     package.json
     src/
+    tools/
 examples/
   openclaw.json
 skill/
@@ -101,6 +103,8 @@ The example expects you to provide:
 
 For a sanitized public checklist, see [docs/LOCAL_VALIDATION.md](F:/Codex/projects/openclaw-wechat-bridge/docs/LOCAL_VALIDATION.md).
 
+For offline plugin testing without a real bridge, see [docs/MOCK_BRIDGE.md](F:/Codex/projects/openclaw-wechat-bridge/docs/MOCK_BRIDGE.md).
+
 ## Project plan
 
 See [ROADMAP.md](F:/Codex/projects/openclaw-wechat-bridge/ROADMAP.md) for the staged implementation plan.
@@ -120,3 +124,4 @@ Publish and describe this as a clean-room bridge project:
 2. Define a credential-provider interface for `token/wsUrl`.
 3. Add a local-only pairing helper prototype outside the public runtime path.
 4. Add tests for gateway startup, outbound delivery, and inbound routing.
+5. Exercise changes first against the local mock bridge.
