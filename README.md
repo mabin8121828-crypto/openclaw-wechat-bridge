@@ -17,6 +17,13 @@ What has been validated locally in a private test environment:
 - the bridge runtime can accept `token` and `wsUrl`
 - an isolated OpenClaw state directory can send and receive messages when valid bridge credentials already exist
 
+What the public repository now includes beyond the initial scaffold:
+
+- a reconnecting WebSocket bridge client skeleton
+- outbound `sendText` wiring for normalized message frames
+- inbound frame parsing and logging hooks
+- explicit separation between runtime transport and QR pairing
+
 What is intentionally not included here:
 
 - Tencent QR login implementation

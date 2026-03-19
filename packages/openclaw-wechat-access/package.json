@@ -5,6 +5,9 @@
   "type": "module",
   "description": "Clean-room WeChat bridge channel scaffold for OpenClaw.",
   "main": "./src/index.ts",
+  "scripts": {
+    "check": "node --eval \"console.log('openclaw-wechat-access scaffold')\""
+  },
   "files": [
     "src",
     "openclaw.plugin.json"
@@ -17,5 +20,8 @@
   ],
   "peerDependencies": {
     "openclaw": ">=2026.1.26"
+  },
+  "dependencies": {
+    "ws": "^8.18.3"
   }
 }

@@ -1,8 +1,10 @@
 import type { OpenClawPluginApi } from "openclaw/plugin-sdk";
 import { emptyPluginConfigSchema } from "openclaw/plugin-sdk";
+import { BridgeWebSocketClient } from "./client.js";
 import { setBridgeRuntime } from "./runtime.js";
 import type {
   BridgeClient,
+  BridgeInboundEnvelope,
   NormalizedChatType,
   WechatBridgeAccountConfig,
   WechatBridgeRootConfig,
@@ -33,18 +35,39 @@ function createBridgeClient(config: WechatBridgeAccountConfig): BridgeClient {
     throw new Error("wechat-bridge requires both token and wsUrl");
   }
 
-  // TODO: replace this placeholder with a real transport implementation.
-  let state: BridgeClient["getState"] extends () => infer T ? T : never = "disconnected";
-
-  return {
-    start() {
-      state = "connected";
+  return new BridgeWebSocketClient(config, {
+    onConnected() {
+      console.log("[wechat-bridge] websocket connected", {
+        accountId: config.accountId ?? "default",
+      });
     },
-    stop() {
-      state = "disconnected";
+    onDisconnected(reason) {
+      console.warn("[wechat-bridge] websocket disconnected", {
+        accountId: config.accountId ?? "default",
+        reason: reason ?? "unknown",
+      });
     },
-    getState() {
-      return state;
+    onError(error) {
+      console.error("[wechat-bridge] websocket error", {
+        accountId: config.accountId ?? "default",
+        message: error.message,
+      });
+    },
+    onWarning(message) {
+      console.warn("[wechat-bridge] warning", {
+        accountId: config.accountId ?? "default",
+        message,
+      });
+    },
+    onEvent(event: BridgeInboundEnvelope) {
+      // Public scaffold phase: receive and normalize bridge frames first.
+      // Actual OpenClaw session dispatch should be added in a follow-up step
+      // once the public plugin runtime contract is finalized.
+      console.log("[wechat-bridge] inbound event", {
+        accountId: config.accountId ?? "default",
+        type: event.type,
+        hasPayload: typeof event.payload !== "undefined",
+      });
     },
   };
 }
@@ -89,7 +112,25 @@ const channelPlugin = {
   },
   outbound: {
     deliveryMode: "direct" as const,
-    sendText: async () => ({ ok: true }),
+    sendText: async (ctx: any) => {
+      const accountId = ctx.accountId ?? "default";
+      const client = clients.get(accountId);
+      if (!client) {
+        return {
+          ok: false,
+          error: new Error(`wechat-bridge client not running for account ${accountId}`),
+        };
+      }
+      await client.sendText({
+        to: ctx.to,
+        text: ctx.text,
+        accountId,
+        replyToId: ctx.replyToId ?? null,
+        threadId: ctx.threadId ?? null,
+        mediaUrl: ctx.mediaUrl,
+      });
+      return { ok: true };
+    },
   },
   status: {
     buildAccountSnapshot: ({ accountId }: { accountId?: string }) => {
@@ -126,6 +167,15 @@ const channelPlugin = {
       }
       ctx.setStatus({ running: false });
     },
+    loginWithQrStart: async () => ({
+      message:
+        "QR pairing is intentionally out of scope for the runtime plugin. Provide token/wsUrl via config or a separate pairing helper.",
+    }),
+    loginWithQrWait: async () => ({
+      connected: false,
+      message:
+        "No embedded QR pairing flow is implemented in the public bridge runtime scaffold.",
+    }),
   },
 };
 
