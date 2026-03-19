@@ -1,0 +1,16 @@
+{
+  "id": "wechat-bridge",
+  "channels": [
+    "wechat-bridge"
+  ],
+  "configSchema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "enabled": {
+        "type": "boolean",
+        "description": "Enable the WeChat bridge channel."
+      }
+    }
+  }
+}

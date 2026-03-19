@@ -1,0 +1,7 @@
+interface:
+  display_name: "OpenClaw WeChat Bridge"
+  short_description: "Wire and debug a WeChat bridge for OpenClaw."
+  default_prompt: "Use $openclaw-wechat-bridge to wire, validate, or troubleshoot a WeChat bridge channel for OpenClaw."
+
+policy:
+  allow_implicit_invocation: true

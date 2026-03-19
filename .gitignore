@@ -1,0 +1,30 @@
+# Node / package artifacts
+node_modules/
+dist/
+build/
+coverage/
+
+# Local env and secrets
+.env
+.env.*
+*.local
+
+# Logs and temp files
+*.log
+*.tmp
+*.temp
+.DS_Store
+Thumbs.db
+
+# Local OpenClaw/QClaw state
+.openclaw/
+.qclaw/
+poc-state/
+*.jsonl
+credentials/
+media/
+
+# IDE
+.vscode/
+.idea/
+

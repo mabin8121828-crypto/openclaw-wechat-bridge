@@ -1,0 +1,20 @@
+{
+  "channels": {
+    "wechat-bridge": {
+      "enabled": true,
+      "token": "${WECHAT_BRIDGE_TOKEN}",
+      "wsUrl": "${WECHAT_BRIDGE_WS_URL}"
+    }
+  },
+  "plugins": {
+    "enabled": true,
+    "allow": [
+      "wechat-bridge"
+    ],
+    "entries": {
+      "wechat-bridge": {
+        "enabled": true
+      }
+    }
+  }
+}

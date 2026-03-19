@@ -1,0 +1,21 @@
+{
+  "name": "openclaw-wechat-access",
+  "version": "0.1.0",
+  "private": false,
+  "type": "module",
+  "description": "Clean-room WeChat bridge channel scaffold for OpenClaw.",
+  "main": "./src/index.ts",
+  "files": [
+    "src",
+    "openclaw.plugin.json"
+  ],
+  "keywords": [
+    "openclaw",
+    "wechat",
+    "plugin",
+    "bridge"
+  ],
+  "peerDependencies": {
+    "openclaw": ">=2026.1.26"
+  }
+}
